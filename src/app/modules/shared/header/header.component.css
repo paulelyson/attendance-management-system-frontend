@@ -1,0 +1,36 @@
+#header {
+  background-color: green;
+}
+
+.header {
+  max-width: 1000px;
+  width: 90%;
+  padding: 0 5%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .nav-wrapper {
+  display: flex;
+}
+
+.header .nav-wrapper .navigation {
+  display: flex;
+  li {
+    list-style: none;
+    a {
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: capitalize;
+      color: wheat;
+      display: block;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      padding: 24px 16px;
+      text-decoration: none;
+    }
+  }
+}
