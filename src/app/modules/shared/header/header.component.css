@@ -1,5 +1,5 @@
 #header {
-  background-color: green;
+  background-color: var(--primary)
 }
 
 .header {
@@ -29,7 +29,7 @@
       line-height: 1;
       position: relative;
       z-index: 1;
-      padding: 24px 16px;
+      padding: 16px 24px;
       text-decoration: none;
     }
   }
