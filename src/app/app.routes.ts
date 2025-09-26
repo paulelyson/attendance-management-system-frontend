@@ -9,4 +9,8 @@ export const routes: Routes = [
     path: 'attendance-view',
     loadChildren: () => import('./modules/attendance-view/attendance-view-module').then((m) => m.AttendanceViewModule),
   },
+  {
+    path: 'attendance-user-detail',
+    loadChildren: () => import('./modules/attendance-user-detail/attendance-user-detail.module').then((m) => m.AttendanceUserDetailModule),
+  },
 ];
