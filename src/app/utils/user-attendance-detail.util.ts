@@ -1,4 +1,5 @@
 import { ISchedule, IScheduleExt } from '../models/AttendanceUserDetail';
+import { IUser } from '../models/User';
 
 export const scheduleToScheduleExt = (schedule: ISchedule | undefined): IScheduleExt => {
   return {
@@ -16,3 +17,5 @@ export const convertTimeTo12HourFormat = (time24: string): string => {
 
   return `${hour}:${minute} ${period}`;
 };
+
+export const getDisplayName = (user: IUser): string => user.firstName + ' ' + user.lastName
