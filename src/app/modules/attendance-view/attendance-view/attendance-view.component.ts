@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { UserDailyAttendanceService } from '../../../services/user-daily-attendance.service';
+import { IUserDailyAttendance } from '../../../models/UserDailyAttendance';
 
 @Component({
   selector: 'app-attendance-view',
-  imports: [],
+  standalone: false,
   templateUrl: './attendance-view.component.html',
-  styleUrl: './attendance-view.component.css'
+  styleUrl: './attendance-view.component.css',
 })
-export class AttendanceViewComponent {
+export class AttendanceViewComponent implements OnInit {
+  attendances: IUserDailyAttendance[] = [];
+  constructor(
+    private dailyAttendanceService: UserDailyAttendanceService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
+  ngOnInit(): void {
+    this.dailyAttendanceService.getUserDailyAttendance().subscribe({
+      next: (resp) => {
+        this.attendances = resp;
+        this.cdr.detectChanges()
+      },
+    });
+  }
 }

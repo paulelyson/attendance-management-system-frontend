@@ -1,0 +1,14 @@
+.mat-column-user,
+.mat-column-date {
+  max-width: 150px;
+  flex: 0 0 150px; /* Optional: to ensure it doesn't grow beyond 150px */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge-wrapper {
+ display: flex;
+ flex-direction: column;
+ gap: 3px;
+}
