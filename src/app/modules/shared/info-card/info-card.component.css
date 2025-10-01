@@ -1,0 +1,15 @@
+.info-card-container{
+ background-color: hsl(350, 47%, 55%, 20%);
+ min-width: 150px;
+ border-radius: 5px;
+
+ display: flex;
+ flex-direction: column;
+ padding: 10px;
+ margin: 0 0 15px 0;
+}
+
+.title {
+ font-size: 16px;
+ font-weight: 600;
+}
