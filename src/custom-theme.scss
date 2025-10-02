@@ -8,7 +8,7 @@
 :root {
   mat-form-field {
     --mat-sys-surface-variant: transparent;
-
+    width: -webkit-fill-available;
     font-family: var(--mat-form-field-container-text-font, var(--mat-sys-body-small-font) Roboto);
     line-height: var(--mat-form-field-container-text-line-height,var(--mat-sys-body-small-line-height));
     font-size: var(--mat-form-field-container-text-size, var(--mat-sys-body-small-size));
@@ -49,6 +49,10 @@
     letter-spacing: var(--mat-form-field-container-text-tracking, var(--mat-sys-body-medium-tracking));
     font-weight: var(--mat-form-field-container-text-weight, var(--mat-sys-body-medium-weight));
   }
+
+  mat-drawer-content {
+    padding: 15px;
+  }
 }
 
 html {
@@ -88,6 +92,30 @@ body {
       padding: 0;
     }
   }
+}
+
+    // --p: 1rem;
+    // --h5: calc(var(--p) * var(--font-scale));
+    // --h4: calc(var(--h5) * var(--font-scale));
+    // --h3: calc(var(--h4) * var(--font-scale));
+    // --h2: calc(var(--h3) * var(--font-scale));
+    // --h1: calc(var(--h2) * var(--font-scale));
+    // --small: calc(var(--p) / var(--font-scale));
+
+.h1-title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.h3-title {
+  font-size: 1.5rem;
+  padding: 2px 10px;
+}
+
+.underlined {
+  -webkit-text-decoration: underline rgba(187, 53, 180, 0.3) solid 4px;
+  text-decoration: underline rgba(187, 53, 180, 0.3) solid 0.2em;
+  text-underline-offset: 1px;
+  text-decoration-skip-ink: none;
 }
 
 // https://www.realtimecolors.com/?colors=140709-fcf6f6-c25567-98dabf-70a5cc&fonts=Inter-Inter
