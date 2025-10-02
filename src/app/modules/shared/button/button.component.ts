@@ -9,9 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './button.component.css',
 })
 export class ButtonComponent {
-  @Output() onClickEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() btnclicked: EventEmitter<string> = new EventEmitter<string>();
 
   onClicked(): void {
-    this.onClickEvent.emit();
+    this.btnclicked.emit();
   }
 }
