@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-input',
-  imports: [CommonModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, FormsModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
   providers: [
@@ -39,7 +39,7 @@ export class InputComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  onSelectChange(_val: any) {
+  onInput(event: Event) {
     this.changed(this.value);
   }
 }
