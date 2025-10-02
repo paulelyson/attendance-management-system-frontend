@@ -7,7 +7,7 @@ import {
   IUserAttendanceDetailByDay,
   UserAttendanceDetailInterface,
 } from '../models/AttendanceUserDetail';
-import { scheduleToScheduleExt } from '../utils/user-attendance-detail.util';
+import { getDisplayName, scheduleToScheduleExt } from '../utils/user-attendance-detail.util';
 
 interface ApiResponse {
   data: UserAttendanceDetailInterface[];
@@ -34,7 +34,7 @@ export class UserAttendanceDetailService {
           let sunday = data.schedule.find((sched) => sched.scheduleDay == 'sunday');
 
           return {
-            user: data.user,
+            user: getDisplayName(data.user),
             monday: scheduleToScheduleExt(monday),
             tuesday: scheduleToScheduleExt(tuesday),
             wednesday: scheduleToScheduleExt(wednesday),
