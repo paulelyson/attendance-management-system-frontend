@@ -3,10 +3,8 @@
     <div class="h3-title underlined">Filters</div>
     <app-input formControlName="user"></app-input>
     <app-datepicker formControlName="attendanceDate"></app-datepicker>
-    <app-dropdown [options]="attendance_status" label="Status"></app-dropdown>
+    <app-dropdown formControlName="status" [options]="attendance_status" label="Status"></app-dropdown>
   </div>
 </form>
 
-<span>nice : {{ this.filterForm.controls['user'].value }}</span>
-<span>attendanceDate : {{ this.filterForm.controls['attendanceDate'].value }}</span>
 
