@@ -1,3 +1,5 @@
+import { IUser } from "./User";
+
 type BreakType = 'lunch_break' | 'bathroom_break';
 type Weekdays = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
@@ -20,7 +22,7 @@ interface IBreak {
 }
 
 export interface UserAttendanceDetailInterface {
-  user: string;
+  user: IUser;
   schedule: ISchedule[];
   dis: boolean;
 }
