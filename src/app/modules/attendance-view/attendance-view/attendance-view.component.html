@@ -1,2 +1,10 @@
-
-<app-attendance-view-table [dataSource]="attendances"></app-attendance-view-table>
+<app-title-section></app-title-section>
+<mat-drawer-container class="sidenav-container">
+  <mat-drawer class="custom-sidenav" mode="side" [opened]="sidenav_opened">
+    <app-side-filter></app-side-filter>
+  </mat-drawer>
+  <mat-drawer-content>
+   <app-button (btnclicked)="sidenav_opened = !sidenav_opened">Open</app-button>
+    <app-attendance-view-table [dataSource]="attendances"></app-attendance-view-table>
+  </mat-drawer-content>
+</mat-drawer-container>

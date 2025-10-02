@@ -9,6 +9,7 @@ import { IUserDailyAttendance } from '../../../models/UserDailyAttendance';
   styleUrl: './attendance-view.component.css',
 })
 export class AttendanceViewComponent implements OnInit {
+  sidenav_opened: boolean = true
   attendances: IUserDailyAttendance[] = [];
   constructor(
     private dailyAttendanceService: UserDailyAttendanceService,

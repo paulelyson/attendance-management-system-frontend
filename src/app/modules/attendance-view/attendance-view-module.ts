@@ -7,6 +7,14 @@ import { AttendanceViewComponent } from './attendance-view/attendance-view.compo
 import { AttendanceViewTableComponent } from './attendance-view-table/attendance-view-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { TwelveHourTimePipe } from '../../pipes/twelve-hour-time.pipe';
+import { InputComponent } from '../shared/input/input.component';
+import { DatepickerComponent } from '../shared/datepicker/datepicker.component';
+import { DropdownComponent } from '../shared/dropdown/dropdown.component';
+import { AutocompleteComponent } from '../shared/autocomplete/autocomplete.component';
+import { ButtonComponent } from '../shared/button/button.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SideFilterComponent } from '../shared/side-filter/side-filter.component';
+import { TitleSectionComponent } from '../shared/title-section/title-section.component';
 
 @NgModule({
   declarations: [AttendanceViewComponent, AttendanceViewTableComponent],
@@ -15,7 +23,15 @@ import { TwelveHourTimePipe } from '../../pipes/twelve-hour-time.pipe';
     AttendanceViewRoutingModule,
     BadgeComponent,
     MatTableModule,
+    MatSidenavModule,
     TwelveHourTimePipe,
+    InputComponent,
+    DatepickerComponent,
+    DropdownComponent,
+    TitleSectionComponent,
+    AutocompleteComponent,
+    ButtonComponent,
+    SideFilterComponent,
   ],
 })
 export class AttendanceViewModule {}

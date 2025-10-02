@@ -1,3 +1,9 @@
+.table-wrapper {
+  padding: 15px;
+  border: 1px solid var(--primary-500);
+  border-radius: 5px;
+}
+
 .mat-column-user,
 .mat-column-date {
   max-width: 150px;
@@ -8,7 +14,7 @@
 }
 
 .badge-wrapper {
- display: flex;
- flex-direction: column;
- gap: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
