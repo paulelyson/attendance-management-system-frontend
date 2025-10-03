@@ -1,4 +1,12 @@
-<div class="info-card-container">
-  <div *ngIf="displayTitle" class="title">{{ title }}</div>
-  <div class="description">{{ description ? description : 'N/A' }}</div>
+<div class="info-card-container" [ngClass]="[size, type]">
+  <div class="badge-wrapper">
+    <app-badge [size]="size">{{ badge }}</app-badge>
+    <span>{{ subDetail }}</span>
+  </div>
+  <div class="title">{{ title }}</div>
+  <div class="description-wrapper">
+    @for(desc of descriptions; track desc) {
+    <div class="description">{{ desc }}</div>
+    }
+  </div>
 </div>
