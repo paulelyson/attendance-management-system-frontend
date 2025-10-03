@@ -5,7 +5,7 @@ import { IUserDailyAttendance } from '../models/UserDailyAttendance';
 import { environment } from '../../environments/environment';
 
 interface ApiResponse {
-  data: IUserDailyAttendance[];
+  data: IUserDailyAttendance[] | IUserDailyAttendance;
   message: string;
   success: boolean;
 }
@@ -17,12 +17,25 @@ export class UserDailyAttendanceService {
   constructor(private http: HttpClient) {}
 
   getUserDailyAttendance(): Observable<IUserDailyAttendance[]> {
-    return this.http
-      .get<ApiResponse>(environment.api_url + '/api/dailyattendance')
-      .pipe(
-        map((resp) => resp.data),
-        catchError(this.handleError)
-      );
+    return this.http.get<ApiResponse>(environment.api_url + '/api/dailyattendance').pipe(
+      map((resp) => resp.data as IUserDailyAttendance[]),
+      catchError(this.handleError)
+    );
+  }
+
+  userTimeIn(user: string): Observable<IUserDailyAttendance> {
+    const body = { user };
+    return this.http.post<ApiResponse>(environment.api_url + '/api/dailyattendance', body).pipe(
+      map((resp) => resp.data as IUserDailyAttendance),
+      catchError(this.handleError)
+    );
+  }
+
+   userTimeOut(attendanceId: string): Observable<IUserDailyAttendance> {
+    return this.http.patch<ApiResponse>(environment.api_url + '/api/dailyattendance/timeout/'+ attendanceId, {}).pipe(
+      map((resp) => resp.data as IUserDailyAttendance),
+      catchError(this.handleError)
+    );
   }
 
   handleError(err: HttpErrorResponse) {

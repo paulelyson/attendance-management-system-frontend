@@ -1,10 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { IUser } from '../models/User';
 
 interface ApiResponse {
-  data: any[];
+  data: IUser[] | IUser;
   message: string;
   success: boolean;
 }
@@ -15,10 +16,19 @@ interface ApiResponse {
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<ApiResponse> {
+  getUsers(): Observable<IUser[]> {
     return this.http
       .get<ApiResponse>(environment.api_url + '/api/user')
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map((resp)=> resp.data as IUser[]),
+        catchError(this.handleError));
+  }
+
+    getUserById(id: string): Observable<IUser> {
+    return this.http.get<ApiResponse>(environment.api_url + '/api/user/' + id).pipe(
+      map((resp) => resp.data as IUser),
+      catchError(this.handleError)
+    );
   }
 
   handleError(err: HttpErrorResponse) {
