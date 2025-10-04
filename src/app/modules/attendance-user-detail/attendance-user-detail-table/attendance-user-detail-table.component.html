@@ -4,16 +4,16 @@
     <ng-container [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
       <td mat-cell *matCellDef="let element">
-        <app-info-card title="" [description]="element[column]"></app-info-card>
+        <app-info-card title="" [descriptions]="[element[column]]"></app-info-card>
       </td>
     </ng-container>
     } @else {
     <ng-container [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
       <td mat-cell *matCellDef="let element">
-        <app-info-card title="Schedule" [description]="element[column].schedule"></app-info-card>
+        <app-info-card title="Schedule" [descriptions]="[element[column].schedule]"></app-info-card>
         @for(break of element[column].breaks; track break) {
-					<app-info-card title="Break" [description]="break"></app-info-card>
+					<app-info-card title="Break" [descriptions]="[break]"></app-info-card>
 				}
       </td>
     </ng-container>

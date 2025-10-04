@@ -5,7 +5,7 @@ import { convertTimeTo12HourFormat } from '../utils/user-attendance-detail.util'
   name: 'twelveHourTime',
 })
 export class TwelveHourTimePipe implements PipeTransform {
-  transform(value: string, ...args: unknown[]): unknown {
+  transform(value: string | undefined, ...args: unknown[]): unknown {
     if (!value || !/^\d{2}:\d{2}$/.test(value)) {
       return value;
     }

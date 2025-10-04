@@ -1,1 +1,17 @@
-<p>attendance works!</p>
+<div class="sec-container">
+  <h1 class="greetings">
+    Hello {{ user()?.firstName }}, today is {{ dateNow | date : 'fullDate' }}
+  </h1>
+  <div class="action-wrapper">
+    <app-button size="lg" type="success" (btnclicked)="timeIn()">Time In</app-button>
+    <app-button size="lg" type="primary" (btnclicked)="timeOut()">Time Out</app-button>
+  </div>
+  <div class="time-detail" *ngIf="attendance()?.timeIn">
+    <span>Time In: {{ attendance()?.timeIn | twelveHourTime }}</span>
+    <app-badge *ngIf="timeInStatus" type="success" size="md">{{ timeInStatus }}</app-badge>
+  </div>
+  <div class="time-detail" *ngIf="attendance()?.timeOut">
+    <span>Time Out: {{ attendance()?.timeOut | twelveHourTime }}</span>
+    
+  </div>
+</div>

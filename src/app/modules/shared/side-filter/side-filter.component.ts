@@ -22,7 +22,6 @@ export class SideFilterComponent {
   attendance_status: AttendanceStatus[] = [
     'in_late',
     'in_ontime',
-    'onbreak',
     'out_ontime',
     'undertime',
   ];

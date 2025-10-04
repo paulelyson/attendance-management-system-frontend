@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IUserDailyAttendance } from '../models/UserDailyAttendance';
@@ -19,6 +19,16 @@ export class UserDailyAttendanceService {
   getUserDailyAttendance(): Observable<IUserDailyAttendance[]> {
     return this.http.get<ApiResponse>(environment.api_url + '/api/dailyattendance').pipe(
       map((resp) => resp.data as IUserDailyAttendance[]),
+      catchError(this.handleError)
+    );
+  }
+
+  getDailyAttendanceByUserAndDate(user: string, date: Date): Observable<IUserDailyAttendance> {
+    let params = new HttpParams();
+    params = params.append('user', user);
+    params = params.append('date', date.toISOString());
+    return this.http.get<ApiResponse>(environment.api_url + '/api/dailyattendance/getbyuseranddate', { params }).pipe(
+      map((resp) => resp.data as IUserDailyAttendance),
       catchError(this.handleError)
     );
   }
