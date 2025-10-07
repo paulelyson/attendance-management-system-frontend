@@ -4,6 +4,9 @@ import { UserDailyAttendanceService } from '../../../services/user-daily-attenda
 import { ActivatedRoute, Params } from '@angular/router';
 import { AttendanceStatus, IUserDailyAttendance } from '../../../models/UserDailyAttendance';
 import { IUser } from '../../../models/User';
+import { BadgeType } from '../../shared/badge/badge.component';
+import { SnackbarService } from '../../../services/snackbar.service';
+import { ISnackBarConfig } from '../../shared/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-attendance',
@@ -15,14 +18,19 @@ export class AttendanceComponent implements OnInit {
   // attendance: IUserDailyAttendance | undefined;
   attendance: WritableSignal<IUserDailyAttendance | undefined> = signal(undefined);
   user: WritableSignal<IUser | undefined> = signal(undefined);
-  // timeInStatus: WritableSignal<AttendanceStatus> = signal('in_ontime');
   dateNow = new Date();
   userId: string = '68d8e43d10b67abecaf4114d';
+  snackBarConfig: ISnackBarConfig = {
+    type: 'primary',
+    message: [],
+    icon: 'info',
+  };
   constructor(
     private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private userDailyAttendanceService: UserDailyAttendanceService
+    private userDailyAttendanceService: UserDailyAttendanceService,
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +43,19 @@ export class AttendanceComponent implements OnInit {
   get timeInStatus() {
     const timeInStatus: AttendanceStatus[] = ['in_late', 'in_ontime'];
     return this.attendance()?.status.filter((status) => timeInStatus.includes(status));
+  }
+
+  get timeOutStatus() {
+    const timeOutStatus: AttendanceStatus[] = ['out_ontime', 'undertime'];
+    return this.attendance()?.status.filter((status) => timeOutStatus.includes(status));
+  }
+
+  get timeInBadgeType(): BadgeType | undefined {
+    return this.attendance()?.status.includes('in_ontime') ? 'success' : undefined;
+  }
+
+  get timeOutBadgeType(): BadgeType | undefined {
+    return this.attendance()?.status.includes('out_ontime') ? 'success' : undefined;
   }
 
   getUserAttendanceByDay() {
@@ -50,14 +71,25 @@ export class AttendanceComponent implements OnInit {
 
   timeIn(): void {
     this.userDailyAttendanceService.userTimeIn(this.userId).subscribe({
-      next: (resp) => this.attendance.set(resp),
+      next: (resp) => {
+        this.attendance.set(resp);
+        this.snackBarConfig.type = 'success';
+        this.snackBarConfig.message = ['Success time In.'];
+        this.snackBarService.openSnackbar(this.snackBarConfig);
+      },
+      error: (err) => {
+        this.snackBarConfig.message = [err.message];
+        this.snackBarService.openSnackbar(this.snackBarConfig);
+      },
     });
   }
 
   timeOut(): void {
     let id: string = this.attendance()?._id as string;
+
     this.userDailyAttendanceService.userTimeOut(id).subscribe({
       next: (resp) => this.attendance.set(resp),
+      error: (err) => console.log(err),
     });
   }
 

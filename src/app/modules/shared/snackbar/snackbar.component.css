@@ -1,4 +1,4 @@
-.alert-container {
+.snackbar-container {
   display: flex;
   width: 640px;
   min-height: 48px;
@@ -6,7 +6,7 @@
   gap: 4px;
 }
 
-.alert-wrapper {
+.snackbar-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -23,52 +23,62 @@
     align-items: flex-start;
   }
 
-  .alert-icon {
+  .snackbar-icon {
     width: var(--font-size-xl);
     height: var(--font-size-xl);
     font-size: var(--font-size-xl);
     aspect-ratio: 1/1;
   }
 
-	.content-wrapper {
-		display: flex;
-		flex: 1 0 0;
-		flex-direction: column;
-		gap: 4px;
+  .content-wrapper {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 4px;
 
-		.header {
-			line-height: var(--line-height-sm);
-			font-weight: var(--font-weight-medium);
-			font-feature-settings: 'case' on;
-		}
+    .header {
+      line-height: var(--line-height-sm);
+      font-weight: var(--font-weight-medium);
+      font-feature-settings: 'case' on;
+    }
 
-		.description {
-			line-height: var(--line-height-sm);
-			font-weight: var(--font-weight-book);
-			font-feature-settings: 'case' on;
-			/* ul and li bullt padding overrides*/
-			margin: 0;
-			padding-left: 1rem;
-		}
+    .description {
+      line-height: var(--line-height-sm);
+      font-weight: var(--font-weight-book);
+      font-feature-settings: 'case' on;
+      /* ul and li bullt padding overrides*/
+      margin: 0;
+      padding-left: 1rem;
+    }
 
-		.description.unlist {
-			list-style-type: none;
-			padding: 0;
-		}
+    .description.unlist {
+      list-style-type: none;
+      padding: 0;
+    }
 
-		.action-wrapper {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-		}
-	}
+    .action-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
 }
 
-.alert-container.primary {
-	border-radius: var(--radius-md);
-	border: 1px solid var();
-	/* background: ;
-	box-shadow: ;
-	color: ; */
-	font-size: var(--font-size-sm);
+.snackbar-container.primary {
+  border-radius: 12px;
+  border: 1px solid var();
+  background: var(--color-bg-primary-idle);
+  color: var(--color-text-primary-default);
+  /* box-shadow: ; */
+  font-size: var(--font-size-sm);
+}
+
+
+.snackbar-container.success {
+  border-radius: 12px;
+  border: 1px solid var(--color-border-success-idle);
+  background: var(--color-bg-success-idle);
+  color: var(--color-text-success-default);
+  /* box-shadow: ; */
+  font-size: var(--font-size-sm);
 }

@@ -8,10 +8,10 @@
   </div>
   <div class="time-detail" *ngIf="attendance()?.timeIn">
     <span>Time In: {{ attendance()?.timeIn | twelveHourTime }}</span>
-    <app-badge *ngIf="timeInStatus" type="success" size="md">{{ timeInStatus }}</app-badge>
+    <app-badge *ngIf="timeInStatus" [type]="timeInBadgeType?? 'danger'" size="md">{{ timeInStatus }}</app-badge>
   </div>
   <div class="time-detail" *ngIf="attendance()?.timeOut">
     <span>Time Out: {{ attendance()?.timeOut | twelveHourTime }}</span>
-    
+    <app-badge *ngIf="timeOutStatus" [type]="timeOutBadgeType?? 'danger'" size="md">{{ timeOutStatus }}</app-badge>
   </div>
 </div>
