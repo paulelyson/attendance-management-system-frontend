@@ -7,11 +7,25 @@
   transition: 0.5s ease;
 }
 
-
 .btn-custom.primary {
-  border: 1px solid var(--color-border-primary-idle);
+  /* border: 1px solid var(--color-border-primary-idle);
   background: var(--color-bg-primary-idle);
-  /* color: var(--color-text-primary-default); */
+  color: var(--color-text-primary-default);
+  color: var(--text); */
+  border: none;
+  background: var(--primary);
+  color: var(--text-white);
+}
+
+.btn-custom.secondary {
+  border: none;
+  background: var(--secondary);
+  color: var(--text);
+}
+
+.btn-custom.secondary.light {
+  border: none;
+  background: var(--secondary-100);
   color: var(--text);
 }
 
