@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 type ButtonSize = 'sm' | 'md' | 'lg';
-type ButtonType ='default'| 'primary' | 'secondary' | 'accent' |'success' | 'warning' | 'danger';
-type ButtonShade = 'default' | 'light'
+type ButtonType = 'default' | 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'danger';
+type ButtonShade = 'default' | 'light';
 
 @Component({
   selector: 'app-button',
@@ -16,7 +16,7 @@ type ButtonShade = 'default' | 'light'
 export class ButtonComponent {
   @Input() size: ButtonSize = 'sm';
   @Input() type: ButtonType = 'default';
-  @Input() shade: ButtonShade = 'default'
+  @Input() shade: ButtonShade = 'default';
   @Output() btnclicked: EventEmitter<string> = new EventEmitter<string>();
 
   onClicked(): void {

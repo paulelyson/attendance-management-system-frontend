@@ -1,20 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --text: #07040e;
-    --text-white: rgb(248, 246, 253);
-    --bg: #f8f6fd;
-    --primary: #754acd;
-    --secondary: #e397b7;
-    --accent: #d8727d;
-    --textcontrast: #64d97b;
-    --bgcontrast: #64d97b;
-    --primarycontrast: #ffdd00;
-    --secondarycontrast: #64d97b;
-    --accentcontrast: #ffdd00;
+  --text: #07040e;
+  --text-white: rgb(248, 246, 253);
+  --bg: #f8f6fd;
+  --primary: #754acd;
+  --secondary: #e397b7;
+  --accent: #d8727d;
+  --textcontrast: #64d97b;
+  --bgcontrast: #64d97b;
+  --primarycontrast: #ffdd00;
+  --secondarycontrast: #64d97b;
+  --accentcontrast: #ffdd00;
 
   /* light shades */
- --text-50: #efebf9;
+  --text-50: #efebf9;
   --text-100: #e0d7f4;
   --text-200: #c1afe9;
   --text-300: #a188dd;
@@ -184,12 +184,10 @@
 
 html,
 body {
-  height: 100%;
-  background-color: var(--background);
-  color: var(--text);
-}
-body {
   margin: 0;
+  height: 100%;
+  background-color: var(--bg);
+  color: var(--text);
   font-family: Inter, 'Helvetica Neue', sans-serif;
   font-display: swap;
 }

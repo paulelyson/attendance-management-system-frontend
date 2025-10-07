@@ -14,6 +14,22 @@
   }
 }
 
+.info-card-container.primary {
+  background: var(--primary-100);
+}
+
+.info-card-container.primary.light {
+  background: var(--primary-50);
+}
+
+.info-card-container.secondary {
+  background: var(--secondary-100);
+}
+
+.info-card-container.secondary.light {
+  background: var(--secondary-50);
+}
+
 .info-card-container.sm {
   font-size: 10px;
   line-height: 14px;
