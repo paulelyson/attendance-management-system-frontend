@@ -1,11 +1,28 @@
 <header id="header">
   <div class="header">
-   <div class="nav-wrapper">
-    <ul class="navigation">
-     <li><a href="#">Home</a></li>
-     <li><a href="#">About</a></li>
-     <li><a href="#">Profile</a></li>
-    </ul>
-   </div>
+    <div class="nav-wrapper">
+      <div class="logo-wrapper">
+        <mat-icon>calendar_today</mat-icon>
+        <div class="title">AMS</div>
+      </div>
+      <span class="spacer"></span>
+      <ul class="navigation">
+        <li><a href="#" (click)="sidenav_opened = !sidenav_opened">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li>
+          <a href="#" [matMenuTriggerFor]="myMenu">Profile</a>
+          <mat-menu #myMenu="matMenu" xPosition="after">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidenav-container" [class.opened]="sidenav_opened">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Profile</a>
   </div>
 </header>

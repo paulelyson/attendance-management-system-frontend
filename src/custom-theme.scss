@@ -10,13 +10,13 @@
     --mat-sys-surface-variant: transparent;
     width: -webkit-fill-available;
     font-family: var(--mat-form-field-container-text-font, var(--mat-sys-body-small-font) Roboto);
-    line-height: var(--mat-form-field-container-text-line-height,var(--mat-sys-body-small-line-height));
+    line-height: var(--mat-form-field-container-text-line-height, var(--mat-sys-body-small-line-height));
     font-size: var(--mat-form-field-container-text-size, var(--mat-sys-body-small-size));
-    letter-spacing: var(--mat-form-field-container-text-tracking, var(--mat-sys-body-small-tracking));
+    letter-spacing: var( --mat-form-field-container-text-tracking,var(--mat-sys-body-small-tracking));
     font-weight: var(--mat-form-field-container-text-weight, var(--mat-sys-body-small-weight));
     height: 70px;
     margin-bottom: -22px;
-    
+
     // Input override
     @include mat.form-field-overrides(
       (
@@ -35,11 +35,11 @@
       font-family: var(--mat-form-field-container-text-font, var(--mat-sys-body-small-font) Roboto);
       line-height: var(--mat-form-field-container-text-line-height,var(--mat-sys-body-small-line-height));
       font-size: var(--mat-form-field-container-text-size, var(--mat-sys-body-small-size));
-      letter-spacing: var(--mat-form-field-container-text-tracking, var(--mat-sys-body-small-tracking));
+      letter-spacing: var(--mat-form-field-container-text-tracking,var(--mat-sys-body-small-tracking));
       font-weight: var(--mat-form-field-container-text-weight, var(--mat-sys-body-small-weight));
     }
   }
-  
+
   // Dropdown option override
   mat-select,
   mat-option.mat-mdc-option {
@@ -52,6 +52,11 @@
 
   mat-drawer-content {
     padding: 15px;
+  }
+
+  //mat menu override
+  .mat-mdc-menu-panel {
+    background-color: var(--primary-100);
   }
 }
 
@@ -87,20 +92,20 @@ body {
 
 .snackbar-override {
   .mat-mdc-snackbar-surface {
-    background-color: transparent;
+    background-color: transparent !important;
     .mdc-snackbar__label {
       padding: 0;
     }
   }
 }
 
-  // --p: 1rem;
-  // --h5: calc(var(--p) * var(--font-scale));
-  // --h4: calc(var(--h5) * var(--font-scale));
-  // --h3: calc(var(--h4) * var(--font-scale));
-  // --h2: calc(var(--h3) * var(--font-scale));
-  // --h1: calc(var(--h2) * var(--font-scale));
-  // --small: calc(var(--p) / var(--font-scale));
+// --p: 1rem;
+// --h5: calc(var(--p) * var(--font-scale));
+// --h4: calc(var(--h5) * var(--font-scale));
+// --h3: calc(var(--h4) * var(--font-scale));
+// --h2: calc(var(--h3) * var(--font-scale));
+// --h1: calc(var(--h2) * var(--font-scale));
+// --small: calc(var(--p) / var(--font-scale));
 
 .h1-title {
   font-size: 2rem;
@@ -112,10 +117,31 @@ body {
 }
 
 .underlined {
-  -webkit-text-decoration: underline rgba(187, 53, 180, 0.3) solid 4px;
-  text-decoration: underline rgba(187, 53, 180, 0.3) solid 0.2em;
+  -webkit-text-decoration: underline var(--accent) solid 4px;
+  text-decoration: underline var(--accent) solid 0.2em;
   text-underline-offset: 1px;
   text-decoration-skip-ink: none;
 }
+// .underlined {
+//   font-weight: 400;
+//   z-index: 5;
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-end;
+//   width: fit-content;
+// }
+// .underlined::before {
+//   content: '';
+//   height: 50%;
+//   width: 100%;
+//   display: block;
+//   z-index: -5;
+//   opacity: 30%;
+//   position: absolute;
+//   transition: all 0.3s ease;
+//   background: linear-gradient(180deg, transparent 50%, var(--accent) 50%);
+// }
 
 // https://www.realtimecolors.com/?colors=140709-fcf6f6-c25567-98dabf-70a5cc&fonts=Inter-Inter
+// https://www.realtimecolors.com/?colors=07040e-f8f6fd-754acd-e397b7-d8727d&fonts=Inter-Inter
