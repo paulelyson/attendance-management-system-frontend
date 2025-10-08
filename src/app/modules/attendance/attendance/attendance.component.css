@@ -1,12 +1,12 @@
 .sec-container {
   max-width: 500px;
   width: 90%;
-  padding: 0 5%;
+  padding: 2rem 5%;
   margin: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 25px;
+  gap: 15px;
 }
 
 h1 {
@@ -17,6 +17,7 @@ h1 {
   font-size: 3rem;
   line-height: normal;
   text-align: center;
+  margin: 0;
 }
 
 .action-wrapper {
@@ -27,14 +28,22 @@ h1 {
   padding: 25px 15px;
 }
 
-.time-detail {
+.time-detail-wrapper {
   display: flex;
-  padding: 5px 20px;
-  justify-content: space-between;
-  align-items: center;
-  line-height: normal;
-  font-size: 16px;
-  gap: 15px;
+  flex-direction: column;
+  .time-detail {
+    display: flex;
+    padding: 5px 20px;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+    font-size: 14px;
+    gap: 15px;
+
+    span:nth-child(1) {
+      color: var(--gray-600);
+    }
+  }
 }
 
 @media screen and (max-width: 420px) {

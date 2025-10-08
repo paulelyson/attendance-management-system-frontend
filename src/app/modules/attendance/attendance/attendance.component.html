@@ -2,16 +2,28 @@
   <h1 class="greetings">
     Hello {{ user()?.firstName }}, today is {{ dateNow | date : 'fullDate' }}
   </h1>
+  <app-section-card size="md" shade="light"></app-section-card>
+
   <div class="action-wrapper">
-    <app-button size="lg" type="success" (btnclicked)="timeIn()">Time In</app-button>
+    <app-button size="lg" type="secondary" shade="light" (btnclicked)="timeIn()">
+      Time In
+    </app-button>
     <app-button size="lg" type="primary" (btnclicked)="timeOut()">Time Out</app-button>
   </div>
-  <div class="time-detail" *ngIf="attendance()?.timeIn">
-    <span>Time In: {{ attendance()?.timeIn | twelveHourTime }}</span>
-    <app-badge *ngIf="timeInStatus" [type]="timeInBadgeType?? 'danger'" size="md">{{ timeInStatus }}</app-badge>
-  </div>
-  <div class="time-detail" *ngIf="attendance()?.timeOut">
-    <span>Time Out: {{ attendance()?.timeOut | twelveHourTime }}</span>
-    <app-badge *ngIf="timeOutStatus" [type]="timeOutBadgeType?? 'danger'" size="md">{{ timeOutStatus }}</app-badge>
+  <div class="time-detail-wrapper">
+    <div class="time-detail" *ngIf="attendance()?.timeIn">
+      <span>Time In:</span>
+      <span>{{ attendance()?.timeIn | twelveHourTime }}</span>
+      <app-badge *ngIf="timeInStatus" [type]="timeInBadgeType ?? 'danger'" size="sm">
+        {{ timeInStatus }}
+      </app-badge>
+    </div>
+    <div class="time-detail" *ngIf="attendance()?.timeOut">
+      <span>Time Out:</span>
+      <span>{{ attendance()?.timeOut | twelveHourTime }}</span>
+      <app-badge *ngIf="timeOutStatus" [type]="timeOutBadgeType ?? 'danger'" size="sm">
+        {{ timeOutStatus }}
+      </app-badge>
+    </div>
   </div>
 </div>
