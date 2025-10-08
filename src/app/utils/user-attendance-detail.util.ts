@@ -1,10 +1,26 @@
-import { ISchedule, IScheduleExt } from '../models/AttendanceUserDetail';
+import {
+  ISchedule,
+  IScheduleExt,
+  UserAttendanceDetailInterface,
+  Weekdays,
+} from '../models/AttendanceUserDetail';
 import { IUser } from '../models/User';
 
 export const scheduleToScheduleExt = (schedule: ISchedule | undefined): IScheduleExt => {
   return {
-    schedule: schedule ? convertTimeTo12HourFormat(schedule.timeIn) + ' - ' + convertTimeTo12HourFormat(schedule.timeOut) : '',
-    breaks: schedule ? schedule.break.map((x) => `${x.type} (${convertTimeTo12HourFormat(x.breakIn)} - ${convertTimeTo12HourFormat(x.breakOut)})`) : [],
+    schedule: schedule
+      ? convertTimeTo12HourFormat(schedule.timeIn) +
+        ' - ' +
+        convertTimeTo12HourFormat(schedule.timeOut)
+      : '',
+    breaks: schedule
+      ? schedule.break.map(
+          (x) =>
+            `${x.type} (${convertTimeTo12HourFormat(x.breakIn)} - ${convertTimeTo12HourFormat(
+              x.breakOut
+            )})`
+        )
+      : [],
   };
 };
 
@@ -18,4 +34,11 @@ export const convertTimeTo12HourFormat = (time24: string): string => {
   return `${hour}:${minute} ${period}`;
 };
 
-export const getDisplayName = (user: IUser): string => user.firstName + ' ' + user.lastName
+export const getScheduleByDayName = (
+  user_attendance: UserAttendanceDetailInterface,
+  dayName: Weekdays
+): ISchedule | undefined => user_attendance.schedule.find((sched) => sched.scheduleDay === dayName);
+
+export const getDisplayName = (user: IUser): string => user.firstName + ' ' + user.lastName;
+
+export const getCurrentDayName = (): Weekdays => new Date().toLocaleString('en-us', { weekday: 'long' }).toLowerCase() as Weekdays;

@@ -1,5 +1,5 @@
 <div class="section-card-container" [ngClass]="[size, type, shade]">
-  <mat-icon class="section-card-icon" [ngClass]="[type]">calendar_today</mat-icon>
+  <mat-icon class="section-card-icon" [ngClass]="[type]">{{ icon }}</mat-icon>
   <div class="underlined title">{{ title }}</div>
   <div class="description-wrapper">
     @for(desc of descriptions; track desc) {

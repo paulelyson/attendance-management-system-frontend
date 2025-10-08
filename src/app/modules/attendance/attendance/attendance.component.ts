@@ -7,6 +7,12 @@ import { IUser } from '../../../models/User';
 import { BadgeType } from '../../shared/badge/badge.component';
 import { SnackbarService } from '../../../services/snackbar.service';
 import { ISnackBarConfig } from '../../shared/snackbar/snackbar.component';
+import { UserAttendanceDetailService } from '../../../services/user-attendance-detail.service';
+import { ISchedule, UserAttendanceDetailInterface } from '../../../models/AttendanceUserDetail';
+import {
+  getCurrentDayName,
+  getScheduleByDayName,
+} from '../../../utils/user-attendance-detail.util';
 
 @Component({
   selector: 'app-attendance',
@@ -18,6 +24,7 @@ export class AttendanceComponent implements OnInit {
   // attendance: IUserDailyAttendance | undefined;
   attendance: WritableSignal<IUserDailyAttendance | undefined> = signal(undefined);
   user: WritableSignal<IUser | undefined> = signal(undefined);
+  userSchedule: WritableSignal<UserAttendanceDetailInterface | undefined> = signal(undefined);
   dateNow = new Date();
   userId: string = '68d8e43d10b67abecaf4114d';
   snackBarConfig: ISnackBarConfig = {
@@ -30,6 +37,7 @@ export class AttendanceComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private userDailyAttendanceService: UserDailyAttendanceService,
+    private userAttendanceDetailService: UserAttendanceDetailService,
     private snackBarService: SnackbarService
   ) {}
 
@@ -58,6 +66,13 @@ export class AttendanceComponent implements OnInit {
     return this.attendance()?.status.includes('out_ontime') ? 'success' : undefined;
   }
 
+  get scheduleToday(): ISchedule | undefined {
+    const today = getCurrentDayName();
+    const sched =  getScheduleByDayName(this.userSchedule() as UserAttendanceDetailInterface, today);
+    console.log({sched})
+    return sched
+  }
+
   getUserAttendanceByDay() {
     let date = new Date();
     this.userDailyAttendanceService
@@ -67,6 +82,14 @@ export class AttendanceComponent implements OnInit {
         // this.cdr.detectChanges(); //this.cdr.markForCheck()
         this.attendance.set(resp);
       });
+  }
+
+  getUserScheduleByUserId() {
+    this.userAttendanceDetailService.getUserAttendanceDetailByUserId(this.userId).subscribe({
+      next: (resp) => {
+        this.userSchedule.set(resp)
+      },
+    });
   }
 
   timeIn(): void {
@@ -94,6 +117,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   queryParamsHandling(params: Params) {
+    this.getUserScheduleByUserId();
     this.getUserAttendanceByDay();
   }
 }

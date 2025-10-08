@@ -1,7 +1,7 @@
 import { IUser } from "./User";
 
 export type BreakType = 'lunch_break' | 'bathroom_break';
-type Weekdays = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+export type Weekdays = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
 export interface ISchedule {
   scheduleDay: Weekdays;

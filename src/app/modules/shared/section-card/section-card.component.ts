@@ -21,4 +21,5 @@ export class SectionCardComponent {
     'Time Out: 5:30 PM',
     'Lunch Break: 12:00 PM - 01:00 PM',
   ];
+  @Input() icon: string = 'calendar_today'
 }

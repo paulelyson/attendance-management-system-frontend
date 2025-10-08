@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -10,7 +10,7 @@ import {
 import { getDisplayName, scheduleToScheduleExt } from '../utils/user-attendance-detail.util';
 
 interface ApiResponse {
-  data: UserAttendanceDetailInterface[];
+  data: UserAttendanceDetailInterface[] | UserAttendanceDetailInterface;
   message: string;
   success: boolean;
 }
@@ -24,7 +24,7 @@ export class UserAttendanceDetailService {
   getUserAttendanceDetail(): Observable<IUserAttendanceDetailByDay[]> {
     return this.http.get<ApiResponse>(environment.api_url + '/api/userattendancedetail').pipe(
       map((resp) => {
-        let mapped = resp.data.map((data) => {
+        let mapped = (resp.data as UserAttendanceDetailInterface[]).map((data) => {
           let monday = data.schedule.find((sched) => sched.scheduleDay == 'monday');
           let tuesday = data.schedule.find((sched) => sched.scheduleDay == 'tuesday');
           let wednesday = data.schedule.find((sched) => sched.scheduleDay == 'wednesday');
@@ -48,6 +48,17 @@ export class UserAttendanceDetailService {
       }),
       catchError(this.handleError)
     );
+  }
+
+  getUserAttendanceDetailByUserId(userId: string): Observable<UserAttendanceDetailInterface> {
+    let params = new HttpParams();
+    params = params.append('user', userId);
+    return this.http
+      .get<ApiResponse>(environment.api_url + '/api/userattendancedetail/getuserschedulebydayname', { params })
+      .pipe(
+        map((resp) => resp.data as UserAttendanceDetailInterface),
+        catchError(this.handleError)
+      );
   }
 
   handleError(err: HttpErrorResponse) {
