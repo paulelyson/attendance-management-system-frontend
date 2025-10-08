@@ -7,6 +7,7 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { InfoCardComponent } from '../shared/info-card/info-card.component';
 import { BadgeComponent } from '../shared/badge/badge.component';
 import { TwelveHourTimePipe } from '../../pipes/twelve-hour-time.pipe';
+import { SectionCardComponent } from '../shared/section-card/section-card.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { TwelveHourTimePipe } from '../../pipes/twelve-hour-time.pipe';
     ButtonComponent,
     InfoCardComponent,
     BadgeComponent,
+    SectionCardComponent,
     TwelveHourTimePipe
   ]
 })
