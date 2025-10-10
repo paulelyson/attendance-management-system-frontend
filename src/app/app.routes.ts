@@ -13,4 +13,8 @@ export const routes: Routes = [
     path: 'attendance-user-detail',
     loadChildren: () => import('./modules/attendance-user-detail/attendance-user-detail.module').then((m) => m.AttendanceUserDetailModule),
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginModule),
+  },
 ];
