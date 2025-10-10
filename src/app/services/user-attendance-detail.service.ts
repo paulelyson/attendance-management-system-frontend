@@ -54,7 +54,7 @@ export class UserAttendanceDetailService {
     let params = new HttpParams();
     params = params.append('user', userId);
     return this.http
-      .get<ApiResponse>(environment.api_url + '/api/userattendancedetail/getuserschedulebydayname', { params })
+      .get<ApiResponse>(environment.api_url + '/api/userattendancedetail/getuserschedulebyuserid', { params })
       .pipe(
         map((resp) => resp.data as UserAttendanceDetailInterface),
         catchError(this.handleError)

@@ -17,14 +17,13 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<IUser[]> {
-    return this.http
-      .get<ApiResponse>(environment.api_url + '/api/user')
-      .pipe(
-        map((resp)=> resp.data as IUser[]),
-        catchError(this.handleError));
+    return this.http.get<ApiResponse>(environment.api_url + '/api/user').pipe(
+      map((resp) => resp.data as IUser[]),
+      catchError(this.handleError)
+    );
   }
 
-    getUserById(id: string): Observable<IUser> {
+  getUserById(id: string): Observable<IUser> {
     return this.http.get<ApiResponse>(environment.api_url + '/api/user/' + id).pipe(
       map((resp) => resp.data as IUser),
       catchError(this.handleError)

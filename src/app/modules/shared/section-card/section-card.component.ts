@@ -15,11 +15,7 @@ export class SectionCardComponent {
   @Input() size: CardSize = 'sm';
   @Input() type: CardType = 'primary';
   @Input() shade: CardShade = 'default';
-  @Input() title: string = 'Your Schedule Today';
-  @Input() descriptions: string[] = [
-    'Time In: 7:30 AM',
-    'Time Out: 5:30 PM',
-    'Lunch Break: 12:00 PM - 01:00 PM',
-  ];
-  @Input() icon: string = 'calendar_today'
+  @Input() title: string = '';
+  @Input() descriptions: string[] = [];
+  @Input() icon: string = 'calendar_today';
 }

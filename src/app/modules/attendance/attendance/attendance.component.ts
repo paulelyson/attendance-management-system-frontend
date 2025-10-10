@@ -10,9 +10,11 @@ import { ISnackBarConfig } from '../../shared/snackbar/snackbar.component';
 import { UserAttendanceDetailService } from '../../../services/user-attendance-detail.service';
 import { ISchedule, UserAttendanceDetailInterface } from '../../../models/AttendanceUserDetail';
 import {
+  convertTimeTo12HourFormat,
   getCurrentDayName,
   getScheduleByDayName,
 } from '../../../utils/user-attendance-detail.util';
+import { snakeCaseToString } from '../../../utils/string.util';
 
 @Component({
   selector: 'app-attendance',
@@ -32,6 +34,9 @@ export class AttendanceComponent implements OnInit {
     message: [],
     icon: 'info',
   };
+
+  schedules: WritableSignal<string[]> = signal([]);
+
   constructor(
     private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
@@ -66,11 +71,19 @@ export class AttendanceComponent implements OnInit {
     return this.attendance()?.status.includes('out_ontime') ? 'success' : undefined;
   }
 
-  get scheduleToday(): ISchedule | undefined {
+  getScheduleToday(): void {
     const today = getCurrentDayName();
-    const sched =  getScheduleByDayName(this.userSchedule() as UserAttendanceDetailInterface, today);
-    console.log({sched})
-    return sched
+    const sched = getScheduleByDayName(this.userSchedule() as UserAttendanceDetailInterface, today);
+    const timeIn = 'Time In: ' + convertTimeTo12HourFormat(sched?.timeIn as string);
+    const timeOut = 'Time Out: ' + convertTimeTo12HourFormat(sched?.timeOut as string);
+    const breaks =
+      sched?.break.map((x) => {
+        const type = snakeCaseToString(x.type);
+        const breakIn = convertTimeTo12HourFormat(x.breakIn);
+        const breakOut = convertTimeTo12HourFormat(x.breakOut);
+        return `${type}: ${breakIn} - ${breakOut}`;
+      }) ?? [];
+    this.schedules.update((sched) => [...sched, timeIn, timeOut, ...breaks]);
   }
 
   getUserAttendanceByDay() {
@@ -87,7 +100,8 @@ export class AttendanceComponent implements OnInit {
   getUserScheduleByUserId() {
     this.userAttendanceDetailService.getUserAttendanceDetailByUserId(this.userId).subscribe({
       next: (resp) => {
-        this.userSchedule.set(resp)
+        this.userSchedule.set(resp);
+        this.getScheduleToday();
       },
     });
   }
@@ -109,7 +123,6 @@ export class AttendanceComponent implements OnInit {
 
   timeOut(): void {
     let id: string = this.attendance()?._id as string;
-
     this.userDailyAttendanceService.userTimeOut(id).subscribe({
       next: (resp) => this.attendance.set(resp),
       error: (err) => console.log(err),

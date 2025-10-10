@@ -37,7 +37,7 @@ export const convertTimeTo12HourFormat = (time24: string): string => {
 export const getScheduleByDayName = (
   user_attendance: UserAttendanceDetailInterface,
   dayName: Weekdays
-): ISchedule | undefined => user_attendance.schedule.find((sched) => sched.scheduleDay === dayName);
+): ISchedule | undefined => user_attendance?.schedule.find((sched) => sched.scheduleDay === dayName);
 
 export const getDisplayName = (user: IUser): string => user.firstName + ' ' + user.lastName;
 

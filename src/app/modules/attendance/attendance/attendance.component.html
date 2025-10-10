@@ -2,7 +2,12 @@
   <h1 class="greetings">
     Hello {{ user()?.firstName }}, today is {{ dateNow | date : 'fullDate' }}
   </h1>
-  <app-section-card size="md" shade="light"></app-section-card>
+  <app-section-card
+    size="md"
+    shade="light"
+    title="Your Schedule Today"
+    [descriptions]="schedules()"
+  ></app-section-card>
 
   <div class="action-wrapper">
     <app-button size="lg" type="secondary" shade="light" (btnclicked)="timeIn()">
@@ -28,4 +33,4 @@
   </div>
 </div>
 
-<span>{{ scheduleToday | json }}</span>
+<!-- <span>{{ scheduleToday | json }}</span> -->
