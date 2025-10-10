@@ -49,3 +49,8 @@
   border-radius: 0.5rem;
   line-height: 2;
 }
+
+
+.btn-custom.width-filled {
+  width: 100%;
+}

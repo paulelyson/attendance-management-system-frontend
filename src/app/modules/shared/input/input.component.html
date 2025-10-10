@@ -1,8 +1,8 @@
-<mat-form-field floatLabel="always">
+<mat-form-field [floatLabel]="floatLabel" [appearance]="appearance">
   <mat-label>{{ label }}</mat-label>
   <input
     matInput
-    placeholder="Type Here"
+    [placeholder]="placeholder"
     autocomplete="off"
     [(ngModel)]="value"
     (input)="onInput($event)"
