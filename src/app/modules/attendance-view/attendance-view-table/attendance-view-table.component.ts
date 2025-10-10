@@ -14,7 +14,7 @@ interface StatusBadgeType {
   standalone: false,
 })
 export class AttendanceViewTableComponent implements OnChanges {
-  @Input() displayedColumns: string[] = ['date', 'user', 'timeIn', 'timeOut', 'status'];
+  @Input() displayedColumns: string[] = ['date', 'user', 'reportsTo', 'timeIn', 'timeOut', 'status'];
   @Input() dataSource: IUserDailyAttendance[] = [];
   badge_types: StatusBadgeType[] = [
     {

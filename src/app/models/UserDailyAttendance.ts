@@ -8,5 +8,6 @@ export interface IUserDailyAttendance {
   user: string;
   timeIn: string;
   timeOut: string;
-  status: AttendanceStatus[]
+  status: AttendanceStatus[];
+  reportsTo: string[]
 }
