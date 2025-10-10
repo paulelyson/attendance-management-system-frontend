@@ -1,7 +1,7 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser } from '../models/User';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 interface ApiResponse {
@@ -11,9 +11,9 @@ interface ApiResponse {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<IUser> {

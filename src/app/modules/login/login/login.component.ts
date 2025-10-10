@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
-import { LoginService } from '../../../services/login.service';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +15,13 @@ export class LoginComponent {
   // errorMessage = signal('');
   displayError = signal(false)
 
-  constructor(private cdr: ChangeDetectorRef, private loginService: LoginService) {}
+  constructor(private cdr: ChangeDetectorRef, private authService: AuthService) {}
 
   login() {
     const email = this.emailControl.value ?? '';
     const password = this.passwordControl.value ?? '';
 
-    this.loginService.login(email, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: (resp) => console.log('success'),
       error: (err) => {
         this.errorMessage = err;
