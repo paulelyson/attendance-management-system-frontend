@@ -1,1 +1,11 @@
-<p>login works!</p>
+<div class="sec-container">
+  <div class="login-wrapper light">
+    <div class="underlined title">Login</div>
+    <app-input [formControl]="emailControl" label="Email"></app-input>
+    <app-input [formControl]="passwordControl" label="Password"></app-input>
+    @if(displayError()){
+    <div class="error">{{ errorMessage }}</div>
+    }
+    <app-button width="width-filled" type="primary" (btnclicked)="login()">Login</app-button>
+  </div>
+</div>
