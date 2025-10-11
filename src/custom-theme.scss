@@ -58,6 +58,11 @@
   .mat-mdc-menu-panel {
     background-color: var(--primary-100);
   }
+
+  // mat spinner override
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: var(--primary),
+  ));
 }
 
 html {

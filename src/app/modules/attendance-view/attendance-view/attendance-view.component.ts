@@ -9,7 +9,8 @@ import { IUserDailyAttendance } from '../../../models/UserDailyAttendance';
   styleUrl: './attendance-view.component.css',
 })
 export class AttendanceViewComponent implements OnInit {
-  sidenav_opened: boolean = true
+  sidenav_opened: boolean = true;
+  isloading: boolean = true;
   attendances: IUserDailyAttendance[] = [];
   constructor(
     private dailyAttendanceService: UserDailyAttendanceService,
@@ -20,7 +21,7 @@ export class AttendanceViewComponent implements OnInit {
     this.dailyAttendanceService.getUserDailyAttendance().subscribe({
       next: (resp) => {
         this.attendances = resp;
-        this.cdr.detectChanges()
+        this.cdr.detectChanges();
       },
     });
   }
