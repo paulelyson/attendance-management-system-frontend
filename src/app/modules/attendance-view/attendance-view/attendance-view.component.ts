@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, signal, WritableSignal } from '@a
 import { UserDailyAttendanceService } from '../../../services/user-daily-attendance.service';
 import { IUserDailyAttendance } from '../../../models/UserDailyAttendance';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ISideFilter } from '../../../models/SideFilter';
 
 @Component({
   selector: 'app-attendance-view',
@@ -13,6 +14,7 @@ export class AttendanceViewComponent implements OnInit {
   sidenav_opened: boolean = true;
   isloading: WritableSignal<boolean> = signal(false);
   attendances: IUserDailyAttendance[] = [];
+  filter: ISideFilter = {};
   constructor(
     private dailyAttendanceService: UserDailyAttendanceService,
     private cdr: ChangeDetectorRef,
@@ -30,13 +32,14 @@ export class AttendanceViewComponent implements OnInit {
         this.attendances = resp;
       },
       complete: () => {
-        console.log('wtf')
+        console.log('wtf');
         this.isloading.set(false);
       },
     });
   }
 
   queryParamsHandling(params: Params) {
+    this.filter.status = params['status'] ?? '';
     this.getUserAttendance();
   }
 }

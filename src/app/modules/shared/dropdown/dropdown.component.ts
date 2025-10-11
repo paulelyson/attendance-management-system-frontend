@@ -40,6 +40,6 @@ export class DropdownComponent implements ControlValueAccessor {
   }
 
   onSelectionChange(event: MatSelectChange): void {
-    this.changed(event.value);
+    this.changed(this.value);
   }
 }
