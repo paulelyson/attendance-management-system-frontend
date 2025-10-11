@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 
 interface ApiResponse {
   data: IUser;
+  token: string;
   message: string;
   success: boolean;
 }
@@ -16,10 +17,9 @@ interface ApiResponse {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<IUser> {
+  login(email: string, password: string): Observable<ApiResponse> {
     const body = { email, password };
     return this.http.post<ApiResponse>(environment.api_url + '/api/login', body).pipe(
-      map((resp) => resp.data),
       catchError(this.handleError)
     );
   }
