@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { SideFilterComponent } from '../shared/side-filter/side-filter.component';
 import { TitleSectionComponent } from '../shared/title-section/title-section.component';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { PaginatorComponent } from '../shared/paginator/paginator.component';
 
 @NgModule({
   declarations: [AttendanceViewComponent, AttendanceViewTableComponent],
@@ -33,7 +34,8 @@ import { SpinnerComponent } from '../shared/spinner/spinner.component';
     AutocompleteComponent,
     ButtonComponent,
     SideFilterComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PaginatorComponent,
   ],
 })
 export class AttendanceViewModule {}

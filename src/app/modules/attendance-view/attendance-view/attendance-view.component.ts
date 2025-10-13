@@ -46,8 +46,12 @@ export class AttendanceViewComponent implements OnInit {
 
   queryParamsHandling(params: Params) {
     this.filter.status = params['status'] ?? '';
-    this.filter.startDate = params['startDate'] ?? new Date().toLocaleString().split(',')[0]; // american format eg 10/13/2025
-    this.filter.endDate = params['endDate'] ?? new Date().toLocaleString().split(',')[0]; // american format eg 10/13/2025
+    this.filter.startDate =
+      new Date(params['startDate']).toLocaleString().split(',')[0] ??
+      new Date().toLocaleString().split(',')[0]; // american format eg 10/13/2025
+    this.filter.endDate =
+      new Date(params['endDate']).toLocaleString().split(',')[0] ??
+      new Date().toLocaleString().split(',')[0]; // american format eg 10/13/2025
     this.filter.reportsTo = this.user._id;
     this.getUserAttendance();
   }
