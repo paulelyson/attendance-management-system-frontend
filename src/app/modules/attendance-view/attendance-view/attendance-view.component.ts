@@ -3,6 +3,9 @@ import { UserDailyAttendanceService } from '../../../services/user-daily-attenda
 import { IUserDailyAttendance } from '../../../models/UserDailyAttendance';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ISideFilter } from '../../../models/SideFilter';
+import { IUser } from '../../../models/User';
+import { UserService } from '../../../services/user.service';
+import { americanDateToISODate, convertToAmericanFormat } from '../../../utils/date.util';
 
 @Component({
   selector: 'app-attendance-view',
@@ -15,11 +18,15 @@ export class AttendanceViewComponent implements OnInit {
   isloading: WritableSignal<boolean> = signal(false);
   attendances: IUserDailyAttendance[] = [];
   filter: ISideFilter = {};
+  user: IUser;
   constructor(
     private dailyAttendanceService: UserDailyAttendanceService,
     private cdr: ChangeDetectorRef,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService
+  ) {
+    this.user = this.userService.getUserDetail();
+  }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params: Params) => this.queryParamsHandling(params));
@@ -32,7 +39,6 @@ export class AttendanceViewComponent implements OnInit {
         this.attendances = resp;
       },
       complete: () => {
-        console.log('wtf');
         this.isloading.set(false);
       },
     });
@@ -40,6 +46,9 @@ export class AttendanceViewComponent implements OnInit {
 
   queryParamsHandling(params: Params) {
     this.filter.status = params['status'] ?? '';
+    this.filter.startDate = params['startDate'] ?? new Date().toLocaleString().split(',')[0]; // american format eg 10/13/2025
+    this.filter.endDate = params['endDate'] ?? new Date().toLocaleString().split(',')[0]; // american format eg 10/13/2025
+    this.filter.reportsTo = this.user._id;
     this.getUserAttendance();
   }
 }

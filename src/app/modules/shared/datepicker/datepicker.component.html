@@ -6,10 +6,20 @@
 </mat-form-field> -->
 
 <mat-form-field class="form-field">
-  <mat-label>Date Acquired</mat-label>
+  <mat-label>{{ label }}</mat-label>
   <mat-date-range-input formGroupName="dateRange" [rangePicker]="picker">
-    <input matStartDate  placeholder="Start date" (dateChange)="onStartDateChange($event)"/>
-    <input matEndDate  placeholder="End date" (dateChange)="onEndDateChange($event)"/>
+    <input
+      matStartDate
+      placeholder="Start date"
+      (dateChange)="onStartDateChange($event)"
+      [(ngModel)]="startDate"
+    />
+    <input
+      matEndDate
+      placeholder="End date"
+      (dateChange)="onEndDateChange($event)"
+      [(ngModel)]="endDate"
+    />
   </mat-date-range-input>
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-date-range-picker #picker></mat-date-range-picker>

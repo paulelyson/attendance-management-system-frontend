@@ -2,9 +2,16 @@
   <div class="filter-container">
     <div class="h3-title underlined">Filters</div>
     <app-input formControlName="user"></app-input>
-    <app-datepicker formControlName="attendanceDate"></app-datepicker>
-    <app-dropdown formControlName="status" [options]="attendance_status" label="Status"></app-dropdown>
+    <app-datepicker
+      formControlName="attendanceDate"
+      (dateChanged)="onDateChanged()"
+      label="Date"
+    ></app-datepicker>
+    <app-dropdown
+      formControlName="status"
+      [options]="attendance_status"
+      label="Status"
+      (selectChanged)="navigate('status')"
+    ></app-dropdown>
   </div>
 </form>
-
-

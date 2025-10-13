@@ -30,6 +30,11 @@ export class UserService {
     );
   }
 
+  getUserDetail(): IUser {
+    const user = localStorage.getItem('user') as string;
+    return JSON.parse(user);
+  }
+
   handleError(err: HttpErrorResponse) {
     return throwError(() => new Error(err.message));
   }

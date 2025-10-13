@@ -1,13 +1,28 @@
-import { Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { americanDateToISODate } from '../../../utils/date.util';
 
 @Component({
   selector: 'app-datepicker',
-  imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+  ],
   templateUrl: './datepicker.component.html',
   styleUrl: './datepicker.component.css',
   providers: [
@@ -19,6 +34,11 @@ import { MatInputModule } from '@angular/material/input';
   ],
 })
 export class DatepickerComponent implements ControlValueAccessor {
+  @Input() label: string = '';
+  @Output() dateChanged: EventEmitter<string> = new EventEmitter();
+  startDate: string = '';
+  endDate: string = '';
+
   // accessor
   value: string = '';
   disabled: boolean = false;
@@ -29,6 +49,8 @@ export class DatepickerComponent implements ControlValueAccessor {
     this.value = value;
   }
   registerOnChange(fn: any): void {
+    const [startDate, endDate] = this.value.split('-'); // splitting eg 10/13/2025-10/14/2025
+    [this.startDate, this.endDate] = [americanDateToISODate(startDate), americanDateToISODate(endDate)]; // converted american to iso since datepicker accepts iso
     this.changed = fn;
   }
   registerOnTouched(fn: any): void {
@@ -39,12 +61,16 @@ export class DatepickerComponent implements ControlValueAccessor {
   }
 
   onStartDateChange(event: MatDatepickerInputEvent<Date>): void {
-    this.value = event.value?.toLocaleString() ?? '';
-    this.changed(this.value);
+    this.value = event.value?.toLocaleString().split(',')[0] ?? '';
+    // this.changed(this.value);
   }
 
   onEndDateChange(event: MatDatepickerInputEvent<Date>): void {
-    this.value = this.value + '-' + (event.value?.toLocaleString() ?? '');
-    this.changed(this.value);
+    if (event.value) {
+      this.value = this.value + '-' + (event.value?.toLocaleString().split(',')[0] ?? '');
+      this.changed(this.value);
+      // emitting datepicker as american format separated by '-' so it's easier to split the start and end
+      this.dateChanged.emit(this.value);
+    }
   }
 }

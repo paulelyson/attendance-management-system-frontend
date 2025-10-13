@@ -1,6 +1,7 @@
 export type jobTitle = 'dialer' | 'manager';
 
 export interface IUser {
+  _id: string;
   firstName: string;
   lastName: string;
   displayName?: string;

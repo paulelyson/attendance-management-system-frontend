@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +20,7 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 export class DropdownComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() options: any[] = [];
+  @Output() selectChanged: EventEmitter<string> = new EventEmitter();
   // accessor
   value: string = '';
   disabled: boolean = false;
@@ -41,5 +42,6 @@ export class DropdownComponent implements ControlValueAccessor {
 
   onSelectionChange(event: MatSelectChange): void {
     this.changed(this.value);
+    this.selectChanged.emit(this.value);
   }
 }
