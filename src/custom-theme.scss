@@ -24,6 +24,11 @@
         subscript-text-font: 8px,
         outlined-label-text-font: 8px,
         filled-label-text-font: 8px,
+
+        //filled form field overrides
+        filled-active-indicator-color: var(--primary),
+        filled-focus-active-indicator-color: var(--primary),
+        filled-focus-label-text-color: var(--primary)
       )
     );
     .mat-mdc-form-field-focus-overlay {
@@ -50,6 +55,11 @@
     font-weight: var(--mat-form-field-container-text-weight, var(--mat-sys-body-medium-weight));
   }
 
+  @include mat.select-overrides((
+    panel-background-color: var(--primary-50),
+    focused-arrow-color: var(--primary)
+  ));
+
   mat-drawer-content {
     padding: 15px;
   }
@@ -62,6 +72,18 @@
   // mat spinner override
   @include mat.progress-spinner-overrides((
     active-indicator-color: var(--primary),
+  ));
+
+  // mat paginator override
+  mat-paginator mat-form-field {
+    width: 84px;
+    height: auto;
+    margin-bottom: 0;
+
+  }
+  @include mat.paginator-overrides((
+    // container-text-color: orange,
+    // container-background-color: red,
   ));
 }
 
