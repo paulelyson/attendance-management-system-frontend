@@ -56,6 +56,7 @@ export class SideFilterComponent implements OnChanges {
   }
 
   navigate(param: string = '', value = null) {
+    (this.navigationExtras.queryParams as Params)['page'] = 1
     if (param) {
       (this.navigationExtras.queryParams as Params)[param] = this.filterForm.controls[param].value;
     }
