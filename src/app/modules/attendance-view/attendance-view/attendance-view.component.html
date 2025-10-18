@@ -9,7 +9,7 @@
     <app-spinner></app-spinner>
     }@else {
     <app-attendance-view-table [dataSource]="attendances"></app-attendance-view-table>
-    <app-paginator></app-paginator>
+    <app-paginator [pagination]="pagination" (onPage)="paginate($event)"></app-paginator>
     }
   </mat-drawer-content>
 </mat-drawer-container>
