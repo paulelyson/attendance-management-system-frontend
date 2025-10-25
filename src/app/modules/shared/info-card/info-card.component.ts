@@ -8,7 +8,7 @@ type CardShade = 'default' | 'light';
 
 @Component({
   selector: 'app-info-card',
-  imports: [CommonModule, BadgeComponent],
+  imports: [CommonModule],
   templateUrl: './info-card.component.html',
   styleUrl: './info-card.component.css',
 })
@@ -23,6 +23,7 @@ export class InfoCardComponent {
     'Youve received a P30 cashback for buying load. Go to the Vouchers  section and tap Claim to redeem.',
     'Keep buying load to for unli cash back',
   ];
+  @Input() contents: [string, string][] = []
   @Input() infomini: string = 'n/a';
   @Input() displayTitle: boolean = false;
 }

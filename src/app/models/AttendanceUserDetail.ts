@@ -12,7 +12,8 @@ export interface ISchedule {
 
 export interface IScheduleExt {
  schedule: string;
- breaks: string[]
+ breaks: string[];
+ schedules: [string, string][]
 }
 
 interface IBreak {

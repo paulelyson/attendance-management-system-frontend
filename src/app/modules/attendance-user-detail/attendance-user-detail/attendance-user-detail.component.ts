@@ -24,13 +24,20 @@ export class AttendanceUserDetailComponent implements OnInit {
     private userAttendanceDetailService: UserAttendanceDetailService,
     private cdr: ChangeDetectorRef
   ) {}
+
   ngOnInit(): void {
     this.userAttendanceDetailService.getUserAttendanceDetail().subscribe({
       next: (resp) => {
-        this.userAttendanceDetail = resp;
+        this.userAttendanceDetail =resp;
         this.cdr.detectChanges()
       },
       complete: () => console.log(this.userAttendanceDetail),
     });
   }
+
+  // mappedUserSchedule(schedules: IUserAttendanceDetailByDay[]) {
+  //   return schedules.map(sched=> {
+  //     sched.
+  //   })
+  // }
 }

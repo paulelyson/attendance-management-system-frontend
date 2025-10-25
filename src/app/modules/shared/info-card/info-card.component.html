@@ -1,12 +1,8 @@
 <div class="info-card-container" [ngClass]="[size, type, shade]">
-  <div class="badge-wrapper">
-    <app-badge [size]="size">{{ badge }}</app-badge>
-    <span>{{ subDetail }}</span>
+  @for(content of contents; track content) {
+  <div class="content-wrapper">
+    <div class="title">{{ content[0] }}</div>
+    <div class="description">{{ content[1] }}</div>
   </div>
-  <div class="title">{{ title }}</div>
-  <div class="description-wrapper">
-    @for(desc of descriptions; track desc) {
-    <div class="description">{{ desc }}</div>
-    }
-  </div>
+  }
 </div>

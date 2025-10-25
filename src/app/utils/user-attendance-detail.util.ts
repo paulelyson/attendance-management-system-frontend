@@ -5,22 +5,33 @@ import {
   Weekdays,
 } from '../models/AttendanceUserDetail';
 import { IUser } from '../models/User';
+import { snakeCaseToString } from './string.util';
 
 export const scheduleToScheduleExt = (schedule: ISchedule | undefined): IScheduleExt => {
+  const timeIn = schedule ? convertTimeTo12HourFormat(schedule.timeIn) : '';
+  const timeOut = schedule ? convertTimeTo12HourFormat(schedule.timeOut) : '';
+  const breaks = schedule
+    ? schedule.break.map((x) => {
+        const type = snakeCaseToString(x.type);
+        const breakIn = convertTimeTo12HourFormat(x.breakIn);
+        const breakOut = convertTimeTo12HourFormat(x.breakOut);
+        return `${type} (${breakIn} - ${breakOut})`;
+      })
+    : [];
+  let schedules: [string, string][] = schedule
+    ? schedule.break.map((x) => {
+        const type = snakeCaseToString(x.type);
+        const breakIn = convertTimeTo12HourFormat(x.breakIn);
+        const breakOut = convertTimeTo12HourFormat(x.breakOut);
+        const range = breakIn + ' - ' + breakOut;
+        return [type, range];
+      })
+    : [];
+  schedules.push(['Schedule', timeIn + ' - ' + timeOut]);
   return {
-    schedule: schedule
-      ? convertTimeTo12HourFormat(schedule.timeIn) +
-        ' - ' +
-        convertTimeTo12HourFormat(schedule.timeOut)
-      : '',
-    breaks: schedule
-      ? schedule.break.map(
-          (x) =>
-            `${x.type} (${convertTimeTo12HourFormat(x.breakIn)} - ${convertTimeTo12HourFormat(
-              x.breakOut
-            )})`
-        )
-      : [],
+    schedule: timeIn + ' - ' + timeOut,
+    breaks: breaks,
+    schedules: schedules,
   };
 };
 
@@ -37,8 +48,10 @@ export const convertTimeTo12HourFormat = (time24: string): string => {
 export const getScheduleByDayName = (
   user_attendance: UserAttendanceDetailInterface,
   dayName: Weekdays
-): ISchedule | undefined => user_attendance?.schedule.find((sched) => sched.scheduleDay === dayName);
+): ISchedule | undefined =>
+  user_attendance?.schedule.find((sched) => sched.scheduleDay === dayName);
 
 export const getDisplayName = (user: IUser): string => user.firstName + ' ' + user.lastName;
 
-export const getCurrentDayName = (): Weekdays => new Date().toLocaleString('en-us', { weekday: 'long' }).toLowerCase() as Weekdays;
+export const getCurrentDayName = (): Weekdays =>
+  new Date().toLocaleString('en-us', { weekday: 'long' }).toLowerCase() as Weekdays;
